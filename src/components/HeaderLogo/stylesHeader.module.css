@@ -1,0 +1,18 @@
+.logo_container {
+    display: flex;
+    grid-template-columns: auto;
+    padding-left: 30px;
+    align-items: center;
+}
+
+.img_logo {
+    height: 90px;
+    object-fit: cover;
+}
+
+.header_text {
+    padding-left: 15px;
+    font-size: 15px;
+    font-weight: 600;
+    margin-right: 25px;
+}

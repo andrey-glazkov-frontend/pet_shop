@@ -1,0 +1,33 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.heart {
+  width: 15px;
+  height: 15px;
+  background-color: rgb(0, 0, 0);
+  transform: rotate(45deg);
+  position: relative;
+}
+
+.heart::before,
+.heart::after {
+  content : '';
+  display: block;
+  width: 15px;
+  height: 15px;
+  background-color: rgb(0, 0, 0);
+  border-radius: 50%;
+  position: absolute;
+}
+
+.heart::before {
+  top: -7px;
+  left: 0;
+}
+
+.heart::after {
+  top: 0;
+  left: -7px;
+}

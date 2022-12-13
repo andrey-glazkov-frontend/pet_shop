@@ -9,6 +9,7 @@ import App from './App'
 
 import { Header } from './components/Header/Header'
 import { Registration } from './components/Registration/Registration'
+import { UserDetail } from './components/UserDetail/UserDetail'
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: 'signin',
     element: <Registration />,
+  },
+  {
+    path: 'profile',
+    element: <UserDetail />,
   },
 ])
 

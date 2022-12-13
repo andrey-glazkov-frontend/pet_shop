@@ -2,11 +2,37 @@ import {
   Formik, Form, Field, ErrorMessage,
 } from 'formik'
 
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
+
 import stylesForm from './formStyles.module.css'
-import { api } from '../../helpers/Api'
 
 export function Autorization({ submitAdditionAction }) {
+  const navigate = useNavigate()
+  function gettingTokeen(values) {
+    fetch('https://api.react-learning.ru/signin', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(values),
+    })
+      .then((res) => {
+        if (res.status >= 200 && res.status < 300) {
+          return res.json()
+        }
+        throw Error('Error')
+      })
+      .then((user) => {
+        localStorage.setItem('userToken', user.token)
+        navigate('/')
+        submitAdditionAction()
+      })
+      .catch((er) => {
+        console.log(er)
+        // eslint-disable-next-line no-alert
+        alert('Неверный пароль или логин')
+      })
+  }
   return (
     <Formik
       initialValues={{ email: '', password: '' }}
@@ -21,17 +47,11 @@ export function Autorization({ submitAdditionAction }) {
         }
         return errors
       }}
-      onSubmit={(values, { setSubmitting }) => {
-        console.log(values.password)
-        api.signIn(values).then((response) => {
-          console.log(response)
-        })
-
-        setSubmitting(false)
-        submitAdditionAction()
+      onSubmit={(values) => {
+        gettingTokeen(values)
       }}
     >
-      {({ isSubmitting }) => (
+      {() => (
         <div className="modal">
           <Form>
             <h2>Войти</h2>
@@ -40,7 +60,7 @@ export function Autorization({ submitAdditionAction }) {
             <Field type="password" name="password" className={stylesForm.input} placeholder="Пароль" />
             <ErrorMessage name="password" component="div" />
             <NavLink to="./signin">Регистрация</NavLink>
-            <button type="submit" disabled={isSubmitting}>
+            <button type="submit">
               Submit
             </button>
           </Form>

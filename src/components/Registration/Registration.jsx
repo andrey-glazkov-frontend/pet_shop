@@ -1,9 +1,11 @@
 import {
   Formik, Form, Field, ErrorMessage,
 } from 'formik'
+import { useNavigate } from 'react-router-dom'
 import { api } from '../../helpers/Api'
 
 export function Registration() {
+  const navigate = useNavigate()
   return (
     <Formik
       initialValues={{ email: '', group: '', password: '' }}
@@ -21,7 +23,7 @@ export function Registration() {
       onSubmit={(values, { setSubmitting }) => {
         console.log(values.password)
         api.signUp(values)
-
+        navigate('/')
         setSubmitting(false)
       }}
     >
@@ -32,7 +34,7 @@ export function Registration() {
             <Field type="email" name="email" placeholder="Введите вашу почту" />
             <ErrorMessage name="email" component="div" />
             <Field type="text" name="group" placeholder="Введите вашу группу" />
-            <ErrorMessage name="email" component="div" />
+
             <Field type="password" name="password" placeholder="Пароль" />
             <ErrorMessage name="password" component="div" />
             <button type="submit" disabled={isSubmitting}>

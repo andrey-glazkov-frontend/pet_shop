@@ -5,6 +5,7 @@ export function HeaderButtons() {
     <div className={stylesButton.container}>
       <i className="fa-regular fa-heart" />
       <i className="fa-light fa-cart-shopping" />
+
     </div>
   )
 }

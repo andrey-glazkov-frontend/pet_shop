@@ -4,7 +4,7 @@ import { Card } from '../Card/Card'
 import { Plug } from '../Plug/Plug'
 import stylesMain from './sylesMain.module.css'
 
-export function Main() {
+export function Main({ token, openModal }) {
   // const [products, setProducts] = useState([])
   // const addNewProduct = (newProduct) => {
   //   setProducts((prev) => [newProduct, ...prev])
@@ -17,23 +17,26 @@ export function Main() {
   //       console.log({ products })
   //     })
   // }, [])
-  const [token, setToken] = useState(localStorage.getItem('userToken'))
+  const [cardStarter, setcardStarter] = useState(false)
   const [products, setProducts] = useState([])
   useEffect(() => {
-    if (!token) {
-      setToken(localStorage.getItem('userToken'))
+    if (token) {
+      setcardStarter(true)
     }
   })
 
   useEffect(() => {
-    api.getAllProducts().then((productsList) => {
-      setProducts(productsList.products)
-    })
-  }, [])
+    if (token) {
+      api.getAllProducts().then((productsList) => {
+        setProducts(productsList.products)
+        console.log('works')
+      })
+    }
+  }, [cardStarter])
 
   return (
     <div className={stylesMain.cards}>
-      {token ? <Card products={products} /> : <Plug />}
+      {token ? <Card products={products} /> : <Plug openModal={openModal} />}
     </div>
   )
 }

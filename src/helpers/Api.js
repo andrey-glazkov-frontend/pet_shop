@@ -3,17 +3,32 @@ export class API {
     this.baseUrl = `${baseUrl}`
   }
 
+  // signIn(data) {
+  //   fetch(`${this.baseUrl}signin`, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-type': 'application/json',
+  //     },
+  //     body: JSON.stringify(data),
+  //   })
+  //   // .then((responseFromBack) => responseFromBack.json())
+  //   //   .then((info) => {
+  //   //     localStorage.setItem('userToken', info.token)
+  //   //   })
+  // }
+
   async signIn(data) {
-    await fetch(`${this.baseUrl}signin`, {
+    fetch(`${this.baseUrl}signin`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
       },
       body: JSON.stringify(data),
-    }).then((responseFromBack) => responseFromBack.json())
-      .then((info) => {
-        localStorage.setItem('userToken', info.token)
-      })
+    })
+    // .then((responseFromBack) => responseFromBack.json())
+    //   .then((info) => {
+    //     localStorage.setItem('userToken', info.token)
+    //   })
   }
 
   async signUp(data) {
@@ -30,7 +45,7 @@ export class API {
       }
     } catch (error) {
       // eslint-disable-next-line no-alert
-      alert('Неверный пароль или логин')
+      throw new Error(error)
     }
   }
 

@@ -3,19 +3,23 @@ import {
 } from 'formik'
 
 import { NavLink, useNavigate } from 'react-router-dom'
+import { api } from '../../helpers/Api'
 
 import stylesForm from './formStyles.module.css'
 
 export function Autorization({ submitAdditionAction }) {
   const navigate = useNavigate()
   function gettingTokeen(values) {
+    /* Рабочая версия авторизацци без TanStack
+Query
     fetch('https://api.react-learning.ru/signin', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(values),
-    })
+    }) */
+    api.signIn(values)
       .then((res) => {
         if (res.status >= 200 && res.status < 300) {
           return res.json()
@@ -24,7 +28,7 @@ export function Autorization({ submitAdditionAction }) {
       })
       .then((user) => {
         localStorage.setItem('userToken', user.token)
-        navigate('/')
+        localStorage.setItem('user', user.data.name)
         submitAdditionAction()
       })
       .catch((er) => {
@@ -49,6 +53,7 @@ export function Autorization({ submitAdditionAction }) {
       }}
       onSubmit={(values) => {
         gettingTokeen(values)
+        navigate('/products')
       }}
     >
       {() => (

@@ -6,13 +6,14 @@
 .search__input {
         width: 30%;
         padding: 12px 24px;
+        animation-iteration-count: 1;
 
         background-color: transparent;
         transition: transform 250ms ease-in-out;
         font-size: 14px;
         line-height: 18px;
         
-        color: #575756;
+        color: black;
         background-color: transparent;
 
  
@@ -21,7 +22,7 @@
         background-size: 18px 18px;
         background-position: 95% center;
         border-radius: 50px;
-        border: 1px solid #575756;
+        border: 3px solid black;
         transition: all 250ms ease-in-out;
         backface-visibility: hidden;
         transform-style: preserve-3d;
@@ -35,10 +36,11 @@
 
 .search__input:hover,
         .search__input:focus {
+            animation-iteration-count: 1;
             padding: 12px 0;
             outline: 0;
-            border: 1px solid transparent;
-            border-bottom: 1px solid #575756;
+            border: 3px solid transparent;
+            border-bottom: 3px solid black;
             border-radius: 0;
             background-position: 100% center;
         }

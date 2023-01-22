@@ -1,22 +1,16 @@
 import { useEffect, useState } from 'react'
-import { api } from '../../helpers/Api'
 import { Card } from '../Card/Card'
 import { Plug } from '../Plug/Plug'
-import stylesMain from './sylesMain.module.css'
 
-export function Main({ token, openModal }) {
-  // const [products, setProducts] = useState([])
-  // const addNewProduct = (newProduct) => {
-  //   setProducts((prev) => [newProduct, ...prev])
-  // }
+export function Main({ openModal }) {
+/*
+Работающая функция генерации карточек без использования TanStack
+Query
+const [products, setProducts] = useState([])
+  const addNewProduct = (newProduct) => {
+    setProducts((prev) => [newProduct, ...prev])
+  }
 
-  // useEffect(() => {
-  //   api.getAllProducts()
-  //     .then((productsList) => {
-  //       addNewProduct(productsList.products)
-  //       console.log({ products })
-  //     })
-  // }, [])
   const [cardStarter, setcardStarter] = useState(false)
   const [products, setProducts] = useState([])
   useEffect(() => {
@@ -29,14 +23,23 @@ export function Main({ token, openModal }) {
     if (token) {
       api.getAllProducts().then((productsList) => {
         setProducts(productsList.products)
-        console.log('works')
       })
     }
   }, [cardStarter])
+  */
+
+  const [token, setToken] = useState(localStorage.getItem('userToken'))
+
+  useEffect(() => {
+    if (!token) {
+      setToken(localStorage.getItem('userToken'))
+    }
+  })
 
   return (
-    <div className={stylesMain.cards}>
-      {token ? <Card products={products} /> : <Plug openModal={openModal} />}
+
+    <div>
+      {!token ? <Plug openModal={openModal} /> : <Card />}
     </div>
   )
 }

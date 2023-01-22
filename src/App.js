@@ -2,8 +2,9 @@ import { useCallback, useEffect, useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import './App.css'
 import { Autorization } from './components/Autorization/Autorization'
-import { Main } from './components/Main/Main'
+// import { Main } from './components/Main/Main'
 import { Modal } from './components/Modal/Modal'
+import { Header } from './components/Header/Header'
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('userToken'))
@@ -28,9 +29,13 @@ function App() {
 
   return (
     <div className="App">
-      <Main token={token}>
+      <Header />
+      {/* <Main token={token}>
         <Outlet />
-      </Main>
+      </Main> */}
+      <div>
+        <Outlet />
+      </div>
       <Modal closeHandler={closeModal} isOpen={isModalOpen}>
         <Autorization submitAdditionAction={closeModal} />
       </Modal>

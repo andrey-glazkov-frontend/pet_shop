@@ -11,13 +11,6 @@
 }
 
 
-.modalContent {
-	background: white;
-	padding: 2rem;
-	border-radius: 16px;
-}
-
-
 .close {
     position: absolute;
     right: 32px;

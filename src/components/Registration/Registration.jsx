@@ -1,11 +1,16 @@
 import {
   Formik, Form, Field, ErrorMessage,
 } from 'formik'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 import { api } from '../../helpers/Api'
 
 export function Registration() {
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
+  const navFunck = (e) => {
+    e.preventDefault()
+
+    window.location.href = 'http://localhost:3000/products'
+  }
   return (
     <Formik
       initialValues={{ email: '', group: '', password: '' }}
@@ -20,14 +25,12 @@ export function Registration() {
         }
         return errors
       }}
-      onSubmit={(values, { setSubmitting }) => {
-        console.log(values.password)
+      onSubmit={(values) => {
         api.signUp(values)
-        navigate('/')
-        setSubmitting(false)
+        navFunck()
       }}
     >
-      {({ isSubmitting }) => (
+      {() => (
         <div className="modal">
           <Form>
             <h2>Регистрация</h2>
@@ -37,7 +40,7 @@ export function Registration() {
 
             <Field type="password" name="password" placeholder="Пароль" />
             <ErrorMessage name="password" component="div" />
-            <button type="submit" disabled={isSubmitting}>
+            <button type="submit">
               Submit
             </button>
           </Form>

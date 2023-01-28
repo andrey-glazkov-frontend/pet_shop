@@ -3,8 +3,23 @@ import axios from 'axios'
 export class API {
   constructor(baseUrl) {
     this.baseUrl = `${baseUrl}`
+    this.token = localStorage.getItem('userToken')
+
     this.headers = {
       'Content-Type': 'application/json',
+    }
+  }
+
+  async getUser() {
+    try {
+      const res = await fetch(`${this.baseUrl}/v2/sm8/users/me`, {
+        headers: {
+          authorization: `Bearer ${this.token}`,
+        },
+      })
+      return res.json()
+    } catch (Error) {
+      throw new Error(Error)
     }
   }
 
@@ -74,18 +89,17 @@ Query
 
   async getAllProducts(search) {
     try {
-      const token = localStorage.getItem('userToken')
       if (search === '') {
         const res = await fetch(`${this.baseUrl}products`, {
           headers: {
-            authorization: `Bearer ${token}`,
+            authorization: `Bearer ${this.token}`,
           },
         })
         return res.json()
       }
       const res = await fetch(`${this.baseUrl}products/search?query=${search}`, {
         headers: {
-          authorization: `Bearer ${token}`,
+          authorization: `Bearer ${this.token}`,
         },
       })
       return res.json()
@@ -94,10 +108,9 @@ Query
     }
   }
 
-  getProductByIDs = (ids) => {
-    const tokenInLS = localStorage.getItem('userToken')
-    if (!ids.length) return []
-    return axios.all(ids.map((id) => axios.get(`${this.baseUrl}products/${id}`, { headers: { ...this.headers, authorization: `Bearer ${tokenInLS}` } })))
+  getProductByIDs = (products) => {
+    if (!products.length) return []
+    return axios.all(products.map((id) => axios.get(`${this.baseUrl}products/${id}`, { headers: { ...this.headers, authorization: `Bearer ${this.token}` } })))
   }
 }
 export const api = new API('https://api.react-learning.ru/')

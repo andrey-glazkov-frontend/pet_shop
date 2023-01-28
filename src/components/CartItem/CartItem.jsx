@@ -1,8 +1,8 @@
 /* eslint-disable no-underscore-dangle */
 import { useDispatch, useSelector } from 'react-redux'
 import {
-  decrementCartAC, incrementCartAC, selectCartAC, unselectCartAC,
-} from '../../redux/actionCreators/cartAC'
+  cartCounterDecrement, cartCounterIncrement, cartSelect, deleteProduct,
+} from '../../redux/slices/cartSlice'
 import styles from './cartItem.module.scss'
 
 export function CartItem({ product }) {
@@ -10,10 +10,14 @@ export function CartItem({ product }) {
   const dispatch = useDispatch()
 
   const increment = () => {
-    dispatch(incrementCartAC({ id: product._id }))
+    dispatch(cartCounterIncrement(product._id))
   }
   const decrement = () => {
-    dispatch(decrementCartAC({ id: product._id }))
+    dispatch(cartCounterDecrement(product._id))
+  }
+
+  const deleteItem = () => {
+    dispatch(deleteProduct(product._id))
   }
 
   const priceCounter = (price, discount) => Math.round(price * ((100 - discount) / 100))
@@ -23,19 +27,19 @@ export function CartItem({ product }) {
   console.log(productInCart)
 
   const selectChekOut = () => {
-    if (productInCart.selected) {
-      dispatch(unselectCartAC({ id: product._id }))
-    } else {
-      dispatch(selectCartAC({ id: product._id }))
-    }
+    // if (productInCart.selected) {
+    //   dispatch(unselectCartAC({ id: product._id }))
+    // } else {
+    //   dispatch(selectCartAC({ id: product._id }))
+    // }
+    dispatch(cartSelect(product._id))
   }
 
   // const turnOnDisable = productInCart.count >= product.stock
-  const turnOfDisable = productInCart.count <= 1
   return (
     <div className={styles.basket_product}>
       <div className={styles.item}>
-        <input type="radio" checked={productInCart.selected} onClick={() => selectChekOut()} />
+        <input selected type="radio" checked={productInCart.selected} onClick={() => selectChekOut()} />
 
         <div className={styles.product_image}>
           <img src={product.pictures} alt="Placholder" className={styles.product_frame} />
@@ -59,9 +63,15 @@ export function CartItem({ product }) {
       </div>
       <div className={styles.quantity}>
         <div className={styles.Counter}>
-          <button disabled={turnOfDisable} type="button" onClick={() => decrement()}>-</button>
+          <button
+            type="button"
+            disabled={productInCart.count === 1}
+            onClick={() => decrement()}
+          >
+            -
+          </button>
           <input readOnly type="number" value={productInCart.count} />
-          <button type="button" onClick={() => increment()}>+</button>
+          <button type="button" disabled={productInCart.count === product.stock} onClick={() => increment()}>+</button>
 
         </div>
         <div className={styles.Price}>
@@ -94,7 +104,7 @@ export function CartItem({ product }) {
 
       </div>
       <div>
-        <button type="button">Удалить</button>
+        <button type="button" onClick={() => deleteItem()}>Удалить</button>
       </div>
     </div>
 

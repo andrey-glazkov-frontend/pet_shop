@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { api } from '../../helpers/Api'
-import { addNewProductAC } from '../../redux/actionCreators/cartAC'
+import { addNewProduct } from '../../redux/slices/cartSlice'
 import Loader from '../Loader/Loader'
 // import {  } from '../../redux/actionCreators/cartAC'
 import stylesCard from './CardStyles.module.css'
@@ -42,12 +42,13 @@ export function Card() {
   })
 
   const addProductState = (id, price, stock) => {
-    dispatch(addNewProductAC({
+    const prodToCart = {
       id,
       count: 1,
       price,
       stock,
-    }))
+    }
+    dispatch(addNewProduct(prodToCart))
   }
 
   if (isLoading) return <Loader />

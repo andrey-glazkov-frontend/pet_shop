@@ -19,17 +19,17 @@ const cartSlice = createSlice({
       }
     },
     cartCounterIncrement(state, action) {
-      const findItem = state.find((item) => item.id === action.payload)
+      const itemInCart = state.find((item) => item.id === action.payload)
 
-      if (findItem) {
-        findItem.count += 1
+      if (itemInCart) {
+        itemInCart.count += 1
       }
     },
     cartCounterDecrement(state, action) {
-      const findItem = state.find((item) => item.id === action.payload)
+      const itemInCart = state.find((item) => item.id === action.payload)
 
-      if (findItem) {
-        findItem.count -= 1
+      if (itemInCart) {
+        itemInCart.count -= 1
       }
     },
     cartSelect(state, action) {

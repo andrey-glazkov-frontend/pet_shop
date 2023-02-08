@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { clearProductsAC } from '../../redux/actionCreators/cartAC'
+import { deleteAllProducts } from '../../redux/slices/cartSlice'
 import style from './cartTotal.module.scss'
 
 export function CartTotal({ productPrices }) {
@@ -7,7 +7,7 @@ export function CartTotal({ productPrices }) {
   const dispatch = useDispatch()
   console.log(productPrices)
   const clearProductsHandler = () => {
-    dispatch(clearProductsAC())
+    dispatch(deleteAllProducts())
   }
   const cart = useSelector((store) => store.cart)
   const getDiscountedPrice = (price, discount) => Math.round(price * ((100 - discount) / 100))
@@ -30,8 +30,6 @@ export function CartTotal({ productPrices }) {
     return { total: totalPrice, discount: fullPrice - totalPrice }
   }
   const { total, discount } = getOrderInfo(productPrices, cart)
-
-  // const finalPrice = totalPrice.reduce()
 
   return (
     <aside>

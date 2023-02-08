@@ -39,7 +39,7 @@ export function CartItem({ product }) {
   return (
     <div className={styles.basket_product}>
       <div className={styles.item}>
-        <input selected type="radio" checked={productInCart.selected} onClick={() => selectChekOut()} />
+        <input type="radio" checked={productInCart.selected} onClick={() => selectChekOut()} />
 
         <div className={styles.product_image}>
           <img src={product.pictures} alt="Placholder" className={styles.product_frame} />

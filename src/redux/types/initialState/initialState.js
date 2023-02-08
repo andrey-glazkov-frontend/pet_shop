@@ -5,6 +5,10 @@ export const initialState = {
     token: '',
     user: {},
   },
+  like: [],
+  sort: {
+    value: '',
+  },
 }
 
 export const REDUX_LS_KEY = 'REDUX_LS_KEY'

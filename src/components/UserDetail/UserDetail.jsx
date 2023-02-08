@@ -2,10 +2,13 @@
 
 import { useQuery } from '@tanstack/react-query'
 import { useDispatch } from 'react-redux'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { Navigate, NavLink, useNavigate } from 'react-router-dom'
 import { api } from '../../helpers/Api'
+import { token } from '../../helpers/functions'
 import { deleteAllProducts } from '../../redux/slices/cartSlice'
-import { removeUser } from '../../redux/slices/userSlice'
+import { clearFavoriteList } from '../../redux/slices/likesSlice'
+import { clearSearch } from '../../redux/slices/searchSlice'
+import { clearSort } from '../../redux/slices/sortProductSlice'
 
 export const USER_QUERY_KEY = ['USER_QUERY_KEY']
 
@@ -28,7 +31,6 @@ export function UserDetail() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  // const { token } = useSelector((store) => store.user)
   const setUser = () => api.getUser()
 
   const { data } = useQuery({
@@ -37,12 +39,18 @@ export function UserDetail() {
   })
 
   const logOut = () => {
-    dispatch(removeUser())
-    // dispatch(clearSort())
-    // dispatch(clearSearch())
+    localStorage.removeItem('userToken')
+    localStorage.removeItem('user')
     dispatch(deleteAllProducts())
+    dispatch(clearFavoriteList())
+
+    dispatch(clearSort())
+    dispatch(clearSearch())
     navigate('/')
+    window.location.reload()
   }
+
+  if (!token) return <Navigate to="/" />
 
   return (
     <div>
@@ -54,7 +62,7 @@ export function UserDetail() {
           Привет,
           {data.name}
         </p>
-        <NavLink onClick={logOut}>Выйти из аккаунта</NavLink>
+        <NavLink onClick={() => logOut()}>Выйти из аккаунта</NavLink>
       </>
       )}
 

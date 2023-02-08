@@ -1,8 +1,10 @@
 /* eslint-disable no-underscore-dangle */
 import { useQuery } from '@tanstack/react-query'
 import { useSelector } from 'react-redux'
+import { Navigate } from 'react-router-dom'
 import { api } from '../../helpers/Api'
 import { ITEMS_QUERY_KEY } from '../../helpers/constants'
+import { token } from '../../helpers/functions'
 import { CartHeader } from '../CartHeader/CartHeader'
 import { CartItem } from '../CartItem/CartItem'
 import { CartTotal } from '../CartTotal/CartTotal'
@@ -28,6 +30,8 @@ export function Cart() {
       </div>
     )
   }
+
+  if (!token) return <Navigate to="/" />
 
   const productPrices = data.map((product) => (
     { id: product.data._id, price: product.data.price, discount: product.data.discount }))

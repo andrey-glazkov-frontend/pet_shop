@@ -22,6 +22,14 @@ export function HeaderSearch() {
     dispatch(setSearch((debounceValue)))
   }, [debounceValue])
 
+  useEffect(() => {
+    setSearchParams({
+      ...Object.fromEntries(searchParams.entries()),
+      search: input,
+    })
+  }, [input])
+  const token = localStorage.getItem('userToken')
+  if (!token) return null
   return (
 
     <input

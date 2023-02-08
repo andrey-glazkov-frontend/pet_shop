@@ -12,11 +12,30 @@ export class API {
 
   async getUser() {
     try {
-      const res = await fetch(`${this.baseUrl}/v2/sm8/users/me`, {
+      const res = await fetch(`${this.baseUrl}v2/sm-8/users/me`, {
         headers: {
           authorization: `Bearer ${this.token}`,
         },
       })
+      return res.json()
+    } catch (Error) {
+      throw new Error(Error)
+    }
+  }
+
+  async deleteProduct(id) {
+    try {
+      const res = await fetch(`${this.baseUrl}/products/${id}`, {
+        method: 'DELETE',
+        headers: {
+          authorization: `Bearer ${this.token}`,
+        },
+      })
+      if (res.status !== 200) {
+        const answer = await res.json()
+        console.log(answer.err.statusCode, answer.message)
+        return answer
+      }
       return res.json()
     } catch (Error) {
       throw new Error(Error)
@@ -35,14 +54,14 @@ export class API {
 
   async signUp(data) {
     try {
-      const response = await fetch(`${this.baseUrl}signup`, {
+      const res = await fetch(`${this.baseUrl}signup`, {
         method: 'POST',
         headers: {
           'Content-type': 'application/json',
         },
         body: JSON.stringify(data),
       })
-      if (response.status !== 200) {
+      if (res.status !== 200) {
         throw new Error()
       }
     } catch (error) {
@@ -108,9 +127,59 @@ Query
     }
   }
 
-  getProductByIDs = (products) => {
-    if (!products.length) return []
-    return axios.all(products.map((id) => axios.get(`${this.baseUrl}products/${id}`, { headers: { ...this.headers, authorization: `Bearer ${this.token}` } })))
+  async addProds(data) {
+    try {
+      const res = await fetch(`${this.baseUrl}products`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${this.token}`,
+        },
+        body: JSON.stringify(data),
+      })
+      return res.json()
+    } catch (Error) {
+      throw new Error(Error)
+    }
+  }
+
+  async getProductById(id) {
+    try {
+      const res = await fetch(`${this.baseUrl}products/${id}`, {
+        headers: {
+          authorization: `Bearer ${this.token}`,
+        },
+      })
+      return res.json()
+    } catch (Error) {
+      throw new Error(Error)
+    }
+  }
+
+  async getReviews(id) {
+    try {
+      const res = await fetch(`${this.baseUrl}products/review/${id}`, {
+        headers: {
+          authorization: `Bearer ${this.token}`,
+        },
+      })
+      return res.json()
+    } catch (Error) {
+      throw new Error(Error)
+    }
+  }
+
+  getProductByIDs = (data) => {
+    if (!data.length) return []
+    return axios.all(data.map((id) => axios.get(
+      `${this.baseUrl}products/${id}`,
+      {
+        headers: {
+          ...this.headers,
+          authorization: `Bearer ${this.token}`,
+        },
+      },
+    )))
   }
 }
 export const api = new API('https://api.react-learning.ru/')

@@ -1,14 +1,18 @@
 import {
   Formik, Form, Field, ErrorMessage,
 } from 'formik'
+import { useDispatch } from 'react-redux'
 
 import { NavLink, useNavigate } from 'react-router-dom'
 import { api } from '../../helpers/Api'
+import { setUser } from '../../redux/slices/userSlice'
 
 import stylesForm from './formStyles.module.css'
 
 export function Autorization({ submitAdditionAction }) {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+
   function gettingTokeen(values) {
     /* Рабочая версия авторизацци без TanStack
 Query
@@ -29,6 +33,8 @@ Query
       .then((user) => {
         localStorage.setItem('userToken', user.token)
         localStorage.setItem('user', user.data.name)
+        dispatch(setUser(user))
+
         submitAdditionAction()
       })
       .catch((er) => {
@@ -54,6 +60,7 @@ Query
       onSubmit={(values) => {
         gettingTokeen(values)
         navigate('/products')
+        window.location.reload()
       }}
     >
       {() => (
@@ -65,7 +72,8 @@ Query
             <Field type="password" name="password" className={stylesForm.input} placeholder="Пароль" />
             <ErrorMessage name="password" component="div" />
             <NavLink to="./signin">Регистрация</NavLink>
-            <button type="submit">
+            <br />
+            <button className=" btn btn-default me-3" type="submit">
               Submit
             </button>
           </Form>

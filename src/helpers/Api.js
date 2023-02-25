@@ -42,14 +42,35 @@ export class API {
     }
   }
 
-  async signIn(data) {
-    return (fetch(`${this.baseUrl}signin`, {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    }))
+  // async signIn(data) {
+  //   return (fetch(`${this.baseUrl}signin`, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-type': 'application/json',
+  //     },
+  //     body: JSON.stringify(data),
+  //   }))
+  // }
+
+  
+  async userSignIn(user) {
+    try {
+      const res = await fetch(`${this.baseUrl}signin`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+      })
+      if (res.status !== 200) {
+        const answer = await res.json()
+        console.log(answer.err.statusCode, answer.message)
+        return answer
+      }
+      return res.json()
+    } catch (Error) {
+      throw new Error(Error)
+    }
   }
 
   async signUp(data) {
@@ -162,6 +183,22 @@ Query
         headers: {
           authorization: `Bearer ${this.token}`,
         },
+      })
+      return res.json()
+    } catch (Error) {
+      throw new Error(Error)
+    }
+  }
+
+  async editProduct(data, id) {
+    try {
+      const res = await fetch(`${this.baseUrl}products/${id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${this.token}`,
+        },
+        body: JSON.stringify(data),
       })
       return res.json()
     } catch (Error) {

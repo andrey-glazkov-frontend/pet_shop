@@ -20,6 +20,7 @@ import { CardDetail } from './components/CardDetail/CardDetail'
 import { AddProduct } from './components/AddProduct/Addproduct'
 import { Card } from './components/Card/Card'
 import { Likes } from './components/Likes/Likes'
+import { EditProduct } from './components/EditProduct/EditProduct'
 
 const queryClient = new QueryClient()
 
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
       {
         path: '/likes',
         element: <Likes />,
+      },
+      {
+        path: '/products/:id/edit',
+        element: <EditProduct />,
       },
     ],
   },

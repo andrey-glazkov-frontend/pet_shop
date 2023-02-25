@@ -144,9 +144,14 @@ export function CardDetail() {
                   </button>
                   {/* Проверка на наличие товара в редаксе есть вставляем мусорку */}
                   {user._id === data.author._id && (
-                    <button className={`${stylesDetail.like} btn btn-default`} onClick={() => removeHandler()} type="button">
-                      <span className="fa fa-trash" />
-                    </button>
+                    <>
+                      <button className={`${stylesDetail.like} btn btn-default`} onClick={() => removeHandler()} type="button">
+                        <span className="fa fa-trash" />
+                      </button>
+                      <button onClick={() => navigate('edit')} type="button" className={`${stylesDetail.like} btn btn-default`}>
+                        <span className="fa fa-pen" />
+                      </button>
+                    </>
                   )}
 
                 </div>

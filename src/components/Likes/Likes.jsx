@@ -78,7 +78,7 @@ export function Likes() {
               </span>
             </span>
             <div className={stylesLike.actions}>
-              <button className={`${stylesLike.add_to_cart} btn btn-default me-3`} type="button" onClick={() => addProductState()}>Добавить в корзину</button>
+              <button className={`${stylesLike.add_to_cart} btn btn-default me-3`} type="button" onClick={() => addProductState(product.data._id, product.data._id, product.data.stock)}>Добавить в корзину</button>
               <button className={`${stylesLike.like} btn btn-default`} onClick={() => addToFav(product.data._id)} type="button">
                 <span className="fa fa-trash" />
               </button>

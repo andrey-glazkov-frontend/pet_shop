@@ -28,7 +28,6 @@ const [products, setProducts] = useState([])
     }
   }, [cardStarter])
   */
-
   const [token, setToken] = useState(localStorage.getItem('userToken'))
 
   useEffect(() => {
@@ -41,7 +40,7 @@ const [products, setProducts] = useState([])
   return (
 
     <div>
-      {!token ? <Plug openModal={openModal} /> : <Card />}
+      {!token ? <Plug openModal={openModal} /> : <Card token={token} />}
     </div>
   )
 }

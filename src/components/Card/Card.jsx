@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import { useQuery } from '@tanstack/react-query'
 import { useDispatch, useSelector } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+import { Navigate, NavLink } from 'react-router-dom'
 import { api } from '../../helpers/Api'
 import { sortProducts } from '../../helpers/functions'
 import { addNewProduct } from '../../redux/slices/cartSlice'
@@ -10,7 +10,9 @@ import Loader from '../Loader/Loader'
 import { SortBar } from '../SortBar/SortBar'
 import stylesCard from './CardStyles.module.css'
 
-export function Card() {
+export function Card({ token }) {
+  if (!token) return <Navigate to="/" />
+
   // const dispatch = useDispatch()
   // // eslint-disable-next-line no-unused-vars
   // const search = useSelector((store) => store.cart)

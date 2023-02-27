@@ -52,7 +52,6 @@ export class API {
   //   }))
   // }
 
-  
   async userSignIn(user) {
     try {
       const res = await fetch(`${this.baseUrl}signin`, {

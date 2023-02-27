@@ -25,6 +25,7 @@ export function EditProduct() {
 
   const successHandler = (res) => {
     navigate(`/products/${res._id}`)
+    window.location.reload()
   }
 
   const { mutate } = useMutation({

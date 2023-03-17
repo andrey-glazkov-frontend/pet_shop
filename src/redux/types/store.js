@@ -1,3 +1,5 @@
+/* Версия хранилища на чистом Redux
+
 import { applyMiddleware, createStore } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
@@ -15,4 +17,17 @@ export const store = createStore(rootReducer, initialState, composeWithDevTools(
 store.subscribe(() => {
   localStorage.setItem('cart', JSON.stringify(store.getState().cart))
   console.log(store.getState())
+})
+*/
+
+import { configureStore } from '@reduxjs/toolkit'
+import { rootReducer } from '../redusers/rootReducer'
+import { REDUX_LS_KEY } from './initialState/initialState'
+
+export const store = configureStore({
+  reducer: rootReducer,
+})
+
+store.subscribe(() => {
+  localStorage.setItem(REDUX_LS_KEY, JSON.stringify(store.getState()))
 })

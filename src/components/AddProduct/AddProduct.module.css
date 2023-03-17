@@ -1,0 +1,132 @@
+/* 64ac15 */
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+h4 {
+  color: #f0a500;
+}
+
+
+.input-group {
+  margin-bottom: 12 px;
+
+  zoom: 1;
+}
+.decoration{
+  width: 100%;
+  padding: 1em;
+  line-height: 1.4;
+  background-color: #f9f9f9;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+  -webkit-transition: 0.35s ease-in-out;
+  -moz-transition: 0.35s ease-in-out;
+  -o-transition: 0.35s ease-in-out;
+  transition: 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+  margin-bottom: 15px;
+}
+
+.input_group:before,
+.input_group:after {
+  content: "";
+  display: table;
+}
+.input_group:after {
+  clear: both;
+}
+.input_group-icon {
+  position: relative;
+}
+.input_group_icon input {
+  padding-left: 4.4em;
+}
+.input-group-icon .input-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3.4em;
+  height: 3.4em;
+  line-height: 3.4em;
+  text-align: center;
+  pointer-events: none;
+}
+.input_group_icon .input-icon:after {
+  position: absolute;
+  top: 0.6em;
+  bottom: 0.6em;
+  left: 3.4em;
+  display: block;
+  border-right: 1px solid #e5e5e5;
+  content: "";
+  -webkit-transition: 0.35s ease-in-out;
+  -moz-transition: 0.35s ease-in-out;
+  -o-transition: 0.35s ease-in-out;
+  transition: 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+}
+.input_group_icon .input-icon i {
+  -webkit-transition: 0.35s ease-in-out;
+  -moz-transition: 0.35s ease-in-out;
+  -o-transition: 0.35s ease-in-out;
+  transition: 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+}
+.container {
+  max-width: 38em;
+  padding: 1em 3em 2em 3em;
+  margin: 30px auto;
+  background-color: #fff;
+  border-radius: 4.2px;
+  box-shadow: 0px 3px 10px -2px rgba(0, 0, 0, 0.2);
+}
+.row {
+  zoom: 1;
+}
+.row:before,
+.row:after {
+  content: "";
+  display: table;
+}
+.row:after {
+  clear: both;
+}
+.col_half {
+  padding-right: 10px;
+  float: left;
+  width: 50%;
+}
+.col_half:last-of-type {
+  padding-right: 0;
+}
+.col_third {
+  padding-right: 10px;
+  float: left;
+  width: 33.33333333%;
+}
+.col_third:last-of-type {
+  padding-right: 0;
+}
+@media only screen and (max-width: 540px) {
+  .col-half {
+    width: 100%;
+    padding-right: 0;
+  }
+}
+
+.add_to_cart, .like {
+    background: #ff9f1a;
+    padding: 1.2em 1.5em;
+    border: none;
+    text-transform: UPPERCASE;
+    font-weight: bold;
+    color: #fff;
+    margin-left: 3px;
+    -webkit-transition: background .3s ease;
+            transition: background .3s ease; }
+    .add_to_cart:hover, .like:hover {
+      background: #b36800;
+      color: #fff; }

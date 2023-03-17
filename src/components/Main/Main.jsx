@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Navigate } from 'react-router-dom'
 import { Card } from '../Card/Card'
 import { Plug } from '../Plug/Plug'
 
@@ -27,19 +28,19 @@ const [products, setProducts] = useState([])
     }
   }, [cardStarter])
   */
-
   const [token, setToken] = useState(localStorage.getItem('userToken'))
 
   useEffect(() => {
     if (!token) {
       setToken(localStorage.getItem('userToken'))
     }
-  })
+    if (!token) <Navigate to="/" />
+  }, [localStorage])
 
   return (
 
     <div>
-      {!token ? <Plug openModal={openModal} /> : <Card />}
+      {!token ? <Plug openModal={openModal} /> : <Card token={token} />}
     </div>
   )
 }

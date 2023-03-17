@@ -1,15 +1,13 @@
 import {
   Formik, Form, Field, ErrorMessage,
 } from 'formik'
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { api } from '../../helpers/Api'
 
 export function Registration() {
-  // const navigate = useNavigate()
-  const navFunck = (e) => {
-    e.preventDefault()
-
-    window.location.href = 'http://localhost:3000/products'
+  const navigate = useNavigate()
+  const navFunck = () => {
+    navigate('/')
   }
   return (
     <Formik

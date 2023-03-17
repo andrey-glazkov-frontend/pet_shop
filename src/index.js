@@ -14,9 +14,13 @@ import { Main } from './components/Main/Main'
 // import { Header } from './components/Header/Header'
 import { Registration } from './components/Registration/Registration'
 import { UserDetail } from './components/UserDetail/UserDetail'
-import { Card } from './components/Card/Card'
 import { store } from './redux/types/store'
 import { Cart } from './components/Cart/Cart'
+import { CardDetail } from './components/CardDetail/CardDetail'
+import { AddProduct } from './components/AddProduct/Addproduct'
+import { Card } from './components/Card/Card'
+import { Likes } from './components/Likes/Likes'
+import { EditProduct } from './components/EditProduct/EditProduct'
 
 const queryClient = new QueryClient()
 
@@ -41,6 +45,22 @@ const router = createBrowserRouter([
       {
         path: 'cart',
         element: <Cart />,
+      },
+      {
+        path: '/products/:id',
+        element: <CardDetail />,
+      },
+      {
+        path: '/addProd',
+        element: <AddProduct />,
+      },
+      {
+        path: '/likes',
+        element: <Likes />,
+      },
+      {
+        path: '/products/:id/edit',
+        element: <EditProduct />,
       },
     ],
   },
